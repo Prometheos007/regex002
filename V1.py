@@ -2,11 +2,11 @@
 
 import re
 
-
-def checkandadd(tup, lis):				#Joins the groups and checks if the found num exists in list. Adds if doesn't
+#Joins the groups and checks if the found num exists in list. Adds if doesn't
+def checkandadd(tup, lis):				
 
 	for i in range(len(tup)):
-		l=''			#temporary var
+		l = ''			#temporary var
 		for j in tup[i]:	#iterates over groups	
 			j = j.lstrip()	#removes unneccessary spaces
 			l += j 			#joins the groups
@@ -15,6 +15,13 @@ def checkandadd(tup, lis):				#Joins the groups and checks if the found num exis
 			print('appended', l) #confirmation
 
 
+
+
+matches = []
+for r in re_list:
+   matches += re.findall( r, string)
+
+print(matches)
 #regex obj 1 
 phone1 = re.compile(r'''
 	(\+?\d{,2})?	#Country Code
@@ -29,12 +36,12 @@ phone1 = re.compile(r'''
 
 #regex obj 2
 phone2 = re.compile(r'''
-	(\+?\d{,2})?	#country code
+	(\+?\d{,2})?	#Country Code
+	(\s|-)?		
+	(\d{5})						#3-3-4 Phone Number
 	(\s|-)?
-	(\d{5})			#5-5 phone number
-	(\s|-)?
-	(\d{5})'  
-''')
+	(\d{5})
+''', re.VERBOSE)
 
 st = '+91 9869049069, 8425069329, +91-986-904-9069, 96999-18373'
 
@@ -44,11 +51,11 @@ mo = phone1.findall(st)
 lo = phone2.findall(st)
 
 
-
-#checkandadd(mo,liss)
-checkandadd(lo,liss)
+checkandadd(mo,liss)
+#checkandadd(lo,liss)
 
 
 for i in liss:
 	print(i)
+
 
